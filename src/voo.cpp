@@ -3,6 +3,14 @@ using std::endl;
 
 int voo::codigos = 0;
 
+int voo::ler_codigo(){
+  return this->codigo;
+}
+
+char voo::ler_status(){
+  return this->status;
+}
+
 ostream& operator<< (ostream& o, voo& a){
   o << "Bem-vindo(a) ao voo: " << a.codigo << endl;
   o << "Status: " << a.status << endl;
@@ -44,15 +52,16 @@ void voo::lancar(){
   }
 
   for (const string& cpf: this->passageiros){
-    optional<astronauta*> maybe_astronauta = registro::buscar(cpf);
+    optional<astronauta*> maybe_astronauta = astronoteca::buscar(cpf);
 
-    if (not maybe_astronauta.has_value() or not maybe_astronauta.value()->esta_disponivel()){
+    if ((not maybe_astronauta.has_value()) or (not maybe_astronauta.value()->esta_disponivel())){
       cout << "É necessário que todos os passageiros estejam disponíveis" << endl;
+      return;
     }
   }
 
   for (const string& cpf: this->passageiros){
-    optional<astronauta*> maybe_astronauta = registro::buscar(cpf);
+    optional<astronauta*> maybe_astronauta = astronoteca::buscar(cpf);
     
     if (not maybe_astronauta.has_value()){
       continue;
@@ -72,7 +81,7 @@ void voo::explodir(){
   }
 
   for (const string&cpf: this-> passageiros) {
-    optional<astronauta*> maybe_astronauta = registro::buscar(cpf);
+    optional<astronauta*> maybe_astronauta = astronoteca::buscar(cpf);
 
     if (not maybe_astronauta.has_value()){
       continue;
@@ -80,6 +89,8 @@ void voo::explodir(){
       maybe_astronauta.value()->matar();
     }
   }
+  
+  this->status = 'E';
 }
 
 void voo::finalizar(){
@@ -89,7 +100,7 @@ void voo::finalizar(){
   }
 
   for (const string& cpf: this->passageiros){
-    optional<astronauta*> maybe_astronauta = registro::buscar(cpf);
+    optional<astronauta*> maybe_astronauta = astronoteca::buscar(cpf);
 
     if (not maybe_astronauta.has_value()){
       continue;
@@ -97,4 +108,6 @@ void voo::finalizar(){
       maybe_astronauta.value()->deixar_disponivel();
     }
   }
+
+  this->status = 'F';
 }

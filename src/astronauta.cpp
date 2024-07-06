@@ -1,8 +1,8 @@
 #include "astronauta.hpp"
 
 ostream& operator<< (ostream& o, const astronauta& a){
-  o << a.nome << a.cpf << a.idade << a.disponivel << a.vivo;
-  o << "voos que participou: " << endl;
+  o << a.nome << "  " << a.cpf << " " << a.idade;
+  o << endl << "voos que participou: " << endl;
   
   for (const int& codigo: a.voos){
     o << codigo << " ";

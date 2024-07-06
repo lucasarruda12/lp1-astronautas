@@ -11,7 +11,7 @@ using std::nullopt;
 #include "astronauta.hpp"
 #include "voo.hpp"
 
-class registro {
+class astronoteca {
   private:
     static map<string, astronauta*> astronautas;
 

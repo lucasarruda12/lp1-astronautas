@@ -2,7 +2,7 @@
 #define VOO_H
 
 #include "astronauta.hpp"
-#include "registro.hpp"
+#include "astronoteca.hpp"
 
 #include <unordered_set>
 using std::unordered_set;
@@ -30,6 +30,8 @@ class voo {
 
   public:
     voo();
+    int ler_codigo();
+    char ler_status();
     void lancar();
     void explodir();
     void finalizar();
